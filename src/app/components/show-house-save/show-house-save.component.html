@@ -1,0 +1,48 @@
+<div class="container">
+    <form (ngSubmit)="saveShowHouse()" #showHouseForm="ngForm" novalidate>
+        
+        <div class="form-group">
+            <label for="showHouseName">Nome da Casa</label> 
+            <input type="text" class="form-control" id="showHouseName" name="name" 
+            placeholder="Digite o nome da casa" [(ngModel)]="showHouse.name"  #name="ngModel"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="showHouseCapacity">Capacidade da Casa</label> 
+            <input type="text" class="form-control" id="showHouseCapacity" name="capacity"
+            placeholder="Digite a capacidade da casa" [(ngModel)]="showHouse.capacity"  #capacity="ngModel"/>
+        </div>
+
+        <div class="form-group">
+            <label for="showHouseCep">Cep</label> 
+            <input type="text" class="form-control" id="showHouseCep" name="cep"
+            placeholder="Digite a cep da casa" [(ngModel)]="showHouse.cep"  #cep="ngModel"/>
+        </div>
+
+        <div class="form-group">
+            <label for="showHouseAddress">Endereço</label> 
+            <input type="text" class="form-control" id="showHouseAddress" name="address"
+            placeholder="Digite o endereço da casa" [(ngModel)]="showHouse.address"  #address="ngModel"/>
+        </div>
+
+        <div class="form-group">
+            <label for="showHouseCity">Cidade</label> 
+            <input type="text" class="form-control" id="showHouseCity" name="city"
+            placeholder="Digite a cidade" [(ngModel)]="showHouse.city"  #city="ngModel"/>
+        </div>
+
+        <div class="form-group">
+            <label for="showHouseState">Estado</label> 
+            <input type="text" class="form-control" id="showHouseState" name="state"
+            placeholder="Digite o estado" [(ngModel)]="showHouse.state"  #state="ngModel"/>
+        </div>
+
+        <div class="form-group">
+            <label for="showHouseNumber">Número da Casa</label> 
+            <input type="text" class="form-control" id="showHouseNumber" name="number"
+            placeholder="Digite o número da casa" [(ngModel)]="showHouse.number"  #number="ngModel"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+    <form (ngSubmit)="saveClient()" #clientForm="ngForm">
+
+        <div class="form-group">
+            <label for="clientName">Nome</label> <input type="text"
+                class="form-control" id="clientName"
+                placeholder="Digite o nome do cliente"  
+                [(ngModel)]="client.name"  #name="ngModel" name="name"/>
+        </div>
+
+        <div class="form-group">
+            <label for="clientCpf">Cpf</label> <input type="text"
+                class="form-control" id="clientCpf"
+                placeholder="Digite o cpf do cliente" 
+                [(ngModel)]="client.cpf"  #cpf="ngModel" name="cpf"/>
+        </div>
+
+        <div class="form-group">
+            <label for="clientBirthDate">Data de Nascimento</label> 
+            <input  type="date" class="form-control" placeholder="Digite a data de Nascimento"
+                id="clientBirthDate"  [(ngModel)]="client.birthDate"  #birthDate="ngModel" name="birthDate"/>
+        </div>  
+
+        <div class="form-group">
+            <label for="clientEmail">Email</label> <input type="text"
+                class="form-control" id="clientEmail"
+                placeholder="Digite o email do cliente" [(ngModel)]="client.email"  #email="ngModel" name="email" />
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label> <input type="text"
+                class="form-control" id="username"
+                placeholder="Digite o username do cliente" [(ngModel)]="client.username"  #username="ngModel" name="username"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label> <input type="password"
+                class="form-control" id="password"
+                placeholder="Digite a senha do cliente" [(ngModel)]="client.password"  #password="ngModel" name="password"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+        
