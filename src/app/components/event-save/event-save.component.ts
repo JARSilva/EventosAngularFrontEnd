@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event/event.service';
 import { NgForm } from '@angular/forms';
 import { Event } from 'src/app/common/event/event';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShowHouseService } from 'src/app/services/showhouse/show-house.service';
 import { ShowHouse } from 'src/app/common/showhouse/show-house';
 
@@ -17,7 +17,36 @@ export class EventSaveComponent implements OnInit {
   event = new Event();
   showHouses: ShowHouse[];
 
-  constructor(private eventService: EventService, private showHouseService: ShowHouseService, private router: Router) { }
+  constructor(private eventService: EventService, private showHouseService: ShowHouseService, private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit(): void {
+    this.listShowHouses();
+    this.route.paramMap.subscribe(() => {
+      this.handleEventDetails();
+    })
+  }
+
+  handleEventDetails() {
+
+    // get the "id" param string convert string to a number using the "+" symbol
+    const theEventId: number = +this.route.snapshot.paramMap.get('id');
+    if(theEventId != 0){
+      this.eventService.getEvent(theEventId).subscribe(
+        data => {
+          this.event = data;
+          const showHouseSelect = document.getElementById('showHouse') as HTMLSelectElement;
+          for (let i = 1; i < showHouseSelect.options.length; i++) {
+            const option = showHouseSelect.options[i] as HTMLOptionElement;
+            const id = Number(option.index);
+            if (id === this.event.showHouse.id) {
+              showHouseSelect.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      )
+    }
+  }
 
   saveEvent() {
       this.eventService.saveEvent(this.event).subscribe(() => {
@@ -33,10 +62,6 @@ export class EventSaveComponent implements OnInit {
     this.showHouseService.getShowHouseList().subscribe((showHouses : ShowHouse[]) => {
       this.showHouses = showHouses;
     });
-  }
-
-  ngOnInit(): void {
-    this.listShowHouses();
   }
 
 }

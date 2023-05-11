@@ -40,6 +40,14 @@ export class EventService {
       )
   }
 
+  deleteEvent(id: number): Observable<Event> {
+    return this.httpClient.delete<Event>(this.baseUrl + '/' + id)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

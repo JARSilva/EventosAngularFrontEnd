@@ -19,13 +19,19 @@ import { ShowHouseSaveComponent } from './components/show-house-save/show-house-
 import { OrderSaveComponent } from './components/order-save/order-save.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { ClientSaveComponent } from './components/client-save/client-save.component';
+import { EventChangeComponent } from './components/event-change/event-change.component';
+import { LoginClientComponent } from './components/login-client/login-client.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'event', component: EventListComponent},
   {path: 'orderList', component: OrderListComponent},
+  {path: 'login', component: LoginClientComponent},
   {path: 'eventSave', component: EventSaveComponent},
-  {path: 'showHouseSave', component: ShowHouseSaveComponent},
+  {path: 'eventChange', component: EventChangeComponent},
+  {path: 'showHouse', component: ShowHouseSaveComponent},
   {path: 'clientSave', component: ClientSaveComponent},
+  {path: 'eventSave/:id', component: EventSaveComponent},
   {path: 'event/:id', component: EventDetalheComponent},
   {path: 'order/:id', component: OrderSaveComponent},
   {path: '',   redirectTo: 'event', pathMatch: 'full'},
@@ -41,12 +47,15 @@ const routes: Routes = [
     ShowHouseSaveComponent,
     OrderSaveComponent,
     OrderListComponent,
-    ClientSaveComponent
+    ClientSaveComponent,
+    EventChangeComponent,
+    LoginClientComponent
   ],  
   imports: [
     RouterModule.forRoot(routes),
     RouterModule.forChild(routes),
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     FormsModule
   ],

@@ -1,0 +1,103 @@
+/* Estilos globais */
+
+*{
+  box-sizing: border-box;
+  }
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  }
+  
+  /* Estilos do menu */
+  .menu {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  }
+  
+  .menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  }
+  
+  /* Estilos dos eventos */
+  .eventos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+  }
+  
+  .evento {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  max-width: 300px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  }
+  
+  .evento:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  }
+  
+  .evento img {
+  max-width: 100%;
+  height: auto;
+  }
+  
+  .evento h3 {
+  margin: 10px 10px 0;
+  font-size: 22px;
+  }
+  
+  .evento p {
+  margin: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  }
+  
+  /* Estilos dos tickets */
+  .tickets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+  }
+  
+  .ticket {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  max-width: 150px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  }
+  
+  .ticket:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  }
+  
+  .ticket h4 {
+  margin: 10px;
+  font-size: 18px;
+  }
+  
+  .ticket p {
+  margin: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  }

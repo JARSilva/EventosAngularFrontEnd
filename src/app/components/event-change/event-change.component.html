@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome do Evento</th>
+        <th>Descrição</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let tempEvent of events" class="table-row" (click)="selectEvent(tempEvent)" [class.selected]="tempEvent === selectedEvent">
+            <td>{{ tempEvent.id }}</td>
+            <td>{{ tempEvent.name }}</td>
+            <td>{{ tempEvent.description }}</td>
+        <td>
+          <button routerLink="/event" routerLinkActive="active" class="btn-editar">Editar</button>
+          <button (click)="deleteEvent(tempEvent); $event.stopPropagation()" class="btn-excluir">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

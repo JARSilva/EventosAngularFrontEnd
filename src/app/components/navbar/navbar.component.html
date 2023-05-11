@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4"
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4"
 		>
-		<a routerLink="event" routerLinkActive="active" class="navbar-brand" >Home</a>
+		 <a routerLink="event" routerLinkActive="active" class="navbar-brand" >Home</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarCollapse" aria-controls="navbarCollapse"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -27,4 +27,37 @@
 
 			</form>
 		</div>
-	</nav>
+
+		 
+	</nav>-->
+<!-- Menu -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#">Logo</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+	  <ul class="navbar-nav ml-auto">
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="event" routerLinkActive="active">Início</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="eventSave" routerLinkActive="active">Add Evento</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="eventChange" routerLinkActive="active">Meus Eventos</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="#">Contato</a>
+		</li>
+	  </ul>
+	  <div class="navbar-auth" *ngIf="!usuarioLogado">
+        <button class="btn-auth btn-login" routerLink="login" routerLinkActive="active">Login</button>
+        <button class="btn-auth btn-signup" routerLink="clientSave" routerLinkActive="active" >Registrar</button>
+      </div>
+	  <div class="navbar-auth" *ngIf="usuarioLogado">
+        <button class="btn-auth btn-login" routerLink="login" routerLinkActive="active">Perfil</button>
+        <button class="btn-auth btn-signup" (click)="logout()" >Sair</button>
+      </div>
+	</div>
+  </nav>
