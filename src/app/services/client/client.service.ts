@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, retry, catchError } from 'rxjs/operators'
+import { Observable, forkJoin, of, throwError } from 'rxjs';
+import { map, retry, catchError, mapTo, ignoreElements, concatMap } from 'rxjs/operators'
 import { Client } from 'src/app/common/client/client';
 import { ClientForm } from '../../common/clientForm/client-form';
 
@@ -18,6 +18,25 @@ export class ClientService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
+  deleteClientAndLogout(): Observable<void> {
+    const id = this.getClientLogado();
+  
+    return this.deleteClient(id).pipe(
+      concatMap(() => {
+        this.logout();
+        return of(null);
+      })
+    );
+  }
+
+  getPerfil(): Observable<Client> {
+    const id = this.getClientLogado();
+    if(id != 0){
+      return this.getClient(id);
+    }
+    return of(null);
+  }
+
   logout(){
     localStorage.removeItem('client');
   }
@@ -26,7 +45,7 @@ export class ClientService {
     localStorage.setItem('client', client.id + "");
   }
 
-  getClientLogado(): Number {
+  getClientLogado(): number {
     return Number(localStorage.getItem('client'));
   }
 
@@ -59,6 +78,14 @@ export class ClientService {
         retry(2),
         catchError(this.handleError)
       )
+  }
+
+  deleteClient(id: number): Observable<void> {
+    return this.httpClient.delete<void>(this.baseUrl + '/' + id)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
   }
 
   handleError(error: HttpErrorResponse) {

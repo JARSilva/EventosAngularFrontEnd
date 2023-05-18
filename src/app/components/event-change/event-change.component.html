@@ -1,3 +1,14 @@
+<div class="container">
+  <h1>Informações do usuário</h1>
+  <ul>
+    <li><strong>Nome: {{ client.name }}</strong> <span id="name"></span></li>
+    <li><strong>CPF: {{ client.cpf }}</strong> <span id="cpf"></span></li>
+    <li><strong>Data de nascimento: {{ client.birthDate }}</strong> <span id="birthDate"></span></li>
+    <li><strong>Email: {{ client.email }}</strong> <span id="email"></span></li>
+  </ul>
+    <button routerLink="/clientSave/{{ client.id }}" routerLinkActive="active" class="btn-editar">Editar</button>
+    <button (click)="deleteClient()" class="btn-excluir">Excluir</button>
+</div>
 <table class="table">
     <thead>
       <tr>
@@ -14,8 +25,31 @@
             <td>{{ tempEvent.name }}</td>
             <td>{{ tempEvent.description }}</td>
         <td>
-          <button routerLink="/event" routerLinkActive="active" class="btn-editar">Editar</button>
+          <button routerLink="/eventSave/{{ tempEvent.id }}" routerLinkActive="active" class="btn-editar">Editar</button>
           <button (click)="deleteEvent(tempEvent); $event.stopPropagation()" class="btn-excluir">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Capacidade</th>
+        <th>Nome da Casa</th>
+        <th>Endereço</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let tempHouse of showHouses" class="table-row" [class.selected]="tempHouse === selectedShowHouse">
+            <td>{{ tempHouse.capacity }}</td>
+            <td>{{ tempHouse.name }}</td>
+            <td>{{ tempHouse.state }}, {{ tempHouse.city }}, {{ tempHouse.address }}, {{ tempHouse.cep }}</td>
+        <td>
+          <button routerLink="/showHouse/{{ tempHouse.id }}" routerLinkActive="active" class="btn-editar">Editar</button>
+          <button (click)="deleteShowHouse(tempHouse); $event.stopPropagation()" class="btn-excluir">Excluir</button>
         </td>
       </tr>
     </tbody>

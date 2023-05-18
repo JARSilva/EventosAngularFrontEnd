@@ -41,14 +41,11 @@
 		<li class="nav-item">
 		  <a class="nav-link" routerLink="event" routerLinkActive="active">Início</a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item" *ngIf="usuarioLogado">
 		  <a class="nav-link" routerLink="eventSave" routerLinkActive="active">Add Evento</a>
 		</li>
-		<li class="nav-item">
-		  <a class="nav-link" routerLink="eventChange" routerLinkActive="active">Meus Eventos</a>
-		</li>
-		<li class="nav-item">
-		  <a class="nav-link" href="#">Contato</a>
+		<li class="nav-item" *ngIf="usuarioLogado">
+		  <a class="nav-link" routerLink="showHouse" routerLinkActive="active">Add Casa de Show</a>
 		</li>
 	  </ul>
 	  <div class="navbar-auth" *ngIf="!usuarioLogado">
@@ -56,7 +53,7 @@
         <button class="btn-auth btn-signup" routerLink="clientSave" routerLinkActive="active" >Registrar</button>
       </div>
 	  <div class="navbar-auth" *ngIf="usuarioLogado">
-        <button class="btn-auth btn-login" routerLink="login" routerLinkActive="active">Perfil</button>
+        <button class="btn-auth btn-login" routerLink="eventChange" routerLinkActive="active">Perfil</button>
         <button class="btn-auth btn-signup" (click)="logout()" >Sair</button>
       </div>
 	</div>

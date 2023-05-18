@@ -22,6 +22,7 @@ import { ClientSaveComponent } from './components/client-save/client-save.compon
 import { EventChangeComponent } from './components/event-change/event-change.component';
 import { LoginClientComponent } from './components/login-client/login-client.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClientPerfilComponent } from './components/client-perfil/client-perfil/client-perfil.component';
 
 const routes: Routes = [
   {path: 'event', component: EventListComponent},
@@ -29,8 +30,11 @@ const routes: Routes = [
   {path: 'login', component: LoginClientComponent},
   {path: 'eventSave', component: EventSaveComponent},
   {path: 'eventChange', component: EventChangeComponent},
+  {path: 'showHouse/:id', component: ShowHouseSaveComponent},
   {path: 'showHouse', component: ShowHouseSaveComponent},
+  {path: 'clientPerfil', component: ClientPerfilComponent},
   {path: 'clientSave', component: ClientSaveComponent},
+  {path: 'clientSave/:id', component: ClientSaveComponent},
   {path: 'eventSave/:id', component: EventSaveComponent},
   {path: 'event/:id', component: EventDetalheComponent},
   {path: 'order/:id', component: OrderSaveComponent},
@@ -49,7 +53,8 @@ const routes: Routes = [
     OrderListComponent,
     ClientSaveComponent,
     EventChangeComponent,
-    LoginClientComponent
+    LoginClientComponent,
+    ClientPerfilComponent
   ],  
   imports: [
     RouterModule.forRoot(routes),

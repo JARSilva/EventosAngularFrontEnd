@@ -24,6 +24,13 @@ export class ShowHouseService {
         catchError(this.handleError))
   }
 
+  getShowHouseListPorId(id: number): Observable<ShowHouse[]> {
+    return this.httpClient.get<ShowHouse[]>(this.baseUrl+'/all/'+id)
+      .pipe(
+        retry(2),
+        catchError(this.handleError))
+  }
+
   getShowHouse(id: number): Observable<ShowHouse> {
     return this.httpClient.get<ShowHouse>(this.baseUrl + '/' + id)
       .pipe(
@@ -34,6 +41,14 @@ export class ShowHouseService {
 
   saveShowHouse(showHouse: ShowHouse): Observable<ShowHouse> {
     return this.httpClient.post<ShowHouse>(this.baseUrl, showHouse, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  deleteShowHouse(id: number): Observable<ShowHouse> {
+    return this.httpClient.delete<ShowHouse>(this.baseUrl + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)

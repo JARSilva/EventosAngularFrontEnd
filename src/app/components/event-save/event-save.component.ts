@@ -5,6 +5,8 @@ import { Event } from 'src/app/common/event/event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShowHouseService } from 'src/app/services/showhouse/show-house.service';
 import { ShowHouse } from 'src/app/common/showhouse/show-house';
+import { ClientService } from '../../services/client/client.service';
+import { Client } from '../../common/client/client';
 
 
 @Component({
@@ -14,16 +16,20 @@ import { ShowHouse } from 'src/app/common/showhouse/show-house';
 })
 export class EventSaveComponent implements OnInit {
 
+  client = new Client();
   event = new Event();
   showHouses: ShowHouse[];
 
-  constructor(private eventService: EventService, private showHouseService: ShowHouseService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private clientService: ClientService, private eventService: EventService, private showHouseService: ShowHouseService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.listShowHouses();
     this.route.paramMap.subscribe(() => {
       this.handleEventDetails();
     })
+    this.clientService.getClient(this.clientService.getClientLogado()).subscribe(client => {
+      this.client = client;
+    });
   }
 
   handleEventDetails() {
@@ -49,9 +55,11 @@ export class EventSaveComponent implements OnInit {
   }
 
   saveEvent() {
+    this.event.client = this.client;
       this.eventService.saveEvent(this.event).subscribe(() => {
-       this.cleanForm();
-      });
+        this.cleanForm();
+       });
+      
   }
 
   cleanForm() {
