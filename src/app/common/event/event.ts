@@ -6,6 +6,8 @@ export class Event {
     id : number;
     name : string;
 	description : string;
+	imageMedia : Blob;
+	imageUrl : string;
 	date : Date;
 	price : number;
 	qtdTicket : number;

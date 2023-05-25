@@ -3,6 +3,8 @@ import { ShowHouse } from 'src/app/common/showhouse/show-house';
 import { NgForm } from '@angular/forms';
 import { ShowHouseService } from 'src/app/services/showhouse/show-house.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Client } from '../../common/client/client';
+import { ClientService } from '../../services/client/client.service';
 
 @Component({
   selector: 'app-show-house-save',
@@ -11,14 +13,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ShowHouseSaveComponent implements OnInit {
 
+  client = new Client();
   showHouse = new ShowHouse();
 
-  constructor(private showHouseService: ShowHouseService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private clientService: ClientService, private showHouseService: ShowHouseService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.handleEventDetails();
     })
+
+    this.clientService.getClient(this.clientService.getClientLogado()).subscribe(client => {
+      this.client = client;
+    });
   }
 
   handleEventDetails() {
@@ -35,6 +42,7 @@ export class ShowHouseSaveComponent implements OnInit {
   }
 
   saveShowHouse() {
+      this.showHouse.client = this.client;
       this.showHouseService.saveShowHouse(this.showHouse).subscribe(() => {
         data => this.cleanForm();
       });

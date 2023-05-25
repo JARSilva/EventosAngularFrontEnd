@@ -7,6 +7,7 @@ import { ShowHouseService } from 'src/app/services/showhouse/show-house.service'
 import { ShowHouse } from 'src/app/common/showhouse/show-house';
 import { ClientService } from '../../services/client/client.service';
 import { Client } from '../../common/client/client';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -19,8 +20,11 @@ export class EventSaveComponent implements OnInit {
   client = new Client();
   event = new Event();
   showHouses: ShowHouse[];
+  image: File;
+  selectedFile = null;
+  
 
-  constructor(private clientService: ClientService, private eventService: EventService, private showHouseService: ShowHouseService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private clientService: ClientService, private eventService: EventService, private showHouseService: ShowHouseService, private route: ActivatedRoute, private router: Router, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.listShowHouses();
@@ -54,13 +58,32 @@ export class EventSaveComponent implements OnInit {
     }
   }
 
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0];
+  }
+
   saveEvent() {
+    const formData = new FormData();
+  formData.append('image', this.selectedFile); // 'image' é o nome do campo no lado do servidor
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'multipart/form-data'
+  });
+
+  // Enviar o formData para o servidor
+  this.httpClient.post<any>('http://localhost:8080/eventApp/upload', this.selectedFile, { headers }
+    ).subscribe(response => {
+    const imageName = response.imageName; // Receber o nome da imagem gerado pelo servidor
+
+    // Salvar o nome da imagem no objeto de evento
+    this.event.imageUrl = imageName;
     this.event.client = this.client;
       this.eventService.saveEvent(this.event).subscribe(() => {
         this.cleanForm();
        });
-      
+  });
   }
+  
 
   cleanForm() {
     window.location.reload();

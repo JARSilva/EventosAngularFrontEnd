@@ -64,7 +64,7 @@ export class EventChangeComponent implements OnInit {
   }
 
   listShowHouses() {
-    this.showHouseService.getShowHouseList().subscribe((showHouses : ShowHouse[]) => {
+    this.showHouseService.getShowHouseListPorId(this.clientService.getClientLogado()).subscribe((showHouses : ShowHouse[]) => {
       this.showHouses = showHouses;
     });
   }
