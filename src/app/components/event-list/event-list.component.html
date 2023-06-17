@@ -20,7 +20,7 @@
 
 <div class="eventos">
     <div class="evento" *ngFor="let tempEvent of events">
-      <img src="https://picsum.photos/300/200" alt="Evento 1">
+      <img [src]="tempEvent.imageUrl" alt="Evento 1">
       <div class="evento-info">
         <h3>{{ tempEvent.name }}</h3>
         <p>{{ tempEvent.description }}</p>

@@ -22,6 +22,7 @@ export class EventSaveComponent implements OnInit {
   showHouses: ShowHouse[];
   image: File;
   selectedFile = null;
+  selectedImageBase64: string;
   
 
   constructor(private clientService: ClientService, private eventService: EventService, private showHouseService: ShowHouseService, private route: ActivatedRoute, private router: Router, private httpClient: HttpClient) { }
@@ -58,30 +59,27 @@ export class EventSaveComponent implements OnInit {
     }
   }
 
-  onFileSelected(event) {
+ onFileSelected(event) {
     this.selectedFile = event.target.files[0];
+    this.convertToBase64(this.selectedFile); // Convert the selected image to base64
+  }
+
+  convertToBase64(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.selectedImageBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 
   saveEvent() {
-    const formData = new FormData();
-  formData.append('image', this.selectedFile); // 'image' é o nome do campo no lado do servidor
-
-  const headers = new HttpHeaders({
-    'Content-Type': 'multipart/form-data'
-  });
-
-  // Enviar o formData para o servidor
-  this.httpClient.post<any>('http://localhost:8080/eventApp/upload', this.selectedFile, { headers }
-    ).subscribe(response => {
-    const imageName = response.imageName; // Receber o nome da imagem gerado pelo servidor
 
     // Salvar o nome da imagem no objeto de evento
-    this.event.imageUrl = imageName;
+    this.event.imageUrl = this.selectedImageBase64;
     this.event.client = this.client;
       this.eventService.saveEvent(this.event).subscribe(() => {
         this.cleanForm();
        });
-  });
   }
   
 
